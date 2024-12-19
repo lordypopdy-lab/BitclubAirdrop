@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import toast, { Toaster } from 'react-hot-toast';
+import { TonConnectButton, useTonConnectUI } from '@tonconnect/ui-react';
 
 const Home = () => {
 
@@ -49,10 +50,9 @@ const Home = () => {
             <div style={{backgroundImage: "url(https://c.tenor.com/TZaIBNauQfAAAAAd/tenor.gif) no-repeat center center/cover", }} className="single-page-area background-container">
                 <div className="p-4 title-area justify-content-between">
                     <img src="/logo/logoAirdrop.jpeg" className="animate" width={50} alt="" srcset="" />
-
-                    <div>
-                        <img width={50} style={{borderRadius: "50%", marginRight: "-50px", marginTop: "", marginBottom: "2px"}} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiZ6EXS65O9Mbdbwz4tHAwQrm40TG-H5hV6g&s" alt="ton logo" srcset="" />
-                   <span style={{display: "flex"}}> 0 TON</span>
+                    <div className="text-center">
+                   <TonConnectButton className="tonConnect" />
+                   <span style={{display: "flex",}}> 0 TON</span>
                     </div>
                 </div>
                 <div className="profile-details mt-5" style={{ backgroundImage: "url(/logo/logoAirdrop.jpeg)" }}>
