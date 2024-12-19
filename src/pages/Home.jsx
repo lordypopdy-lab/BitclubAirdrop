@@ -81,7 +81,7 @@ const Home = () => {
                     <Slider {...settings}>
                         {cards.map((card) => (
                             <div key={card.id} style={{ padding: "10px" }}>
-                                <div style={{ padding: "25px", background: "#07080a", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19)" }}>
+                                <div style={{ padding: "25px", opacity: "0.9", background: "#07080a", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19)" }}>
                                     <div style={{ boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19),", padding: "8px", background: "#0f1216", width: "100px", textAlign: "center", borderRadius: "7px" }}>
                                         <div>
                                             <img className="animate" style={{ marginLeft: "20px", marginBottom: "6px", marginTop: "16px"}} width={40} src="/logo/flash.png" alt="" srcset="" />
@@ -91,7 +91,7 @@ const Home = () => {
                                             </button>
                                         </div>
                                     </div>
-                                    <button style={{ float: "right", background: "#0f1216", color: "#e1e1e1", marginTop: "-50px", marginRight: "4px", border: "none", padding: "4px", width: "80px", fontSize: "15px", borderRadius: "50px" }}>
+                                    <button style={{ float: "right", background: "#0f1216", color: "#e1e1e1", marginTop: "-50px", marginRight: "4px", border: "none", padding: "5px", width: "80px", fontSize: "15px", borderRadius: "50px" }}>
                                         Claim
                                     </button>
                                     <h5 style={{ float: "right", marginTop: "-120px", color: '#e1e1e1', padding: "10px", borderRadius: "7px", boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19)" }}>
