@@ -31,6 +31,32 @@ const Home = () => {
         { id: 2, title: "Card 2", content: "This is Card 2" },
     ];
 
+    const bgStyles = {
+        position: "relative",
+        width: "100%",
+        height: "300px",
+        background: "url(/logo/Home.jpeg)",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        color: "white",
+        textAlign: "center",
+        marginTop: "60px",
+        btn: {
+            width: "100%",
+            border: "none",
+            outline: "none",
+            borderRadius: "4px",
+            padding: "10px",
+            fontFamily: `"Poppins", sans-serif`,
+            fontWeight: "500",
+            fontStyle: "normal",
+        },
+        logo: {
+            margin: "4px",
+            borderRadius: ""
+        }
+    }
 
     return (
         <>
@@ -47,12 +73,12 @@ const Home = () => {
             </div> */}
             {/* <!-- preloader area end --> */}
             <div className="body-overlay" id="body-overlay"></div>
-            <div style={{backgroundImage: "url(https://c.tenor.com/TZaIBNauQfAAAAAd/tenor.gif) no-repeat center center/cover", }} className="single-page-area background-container">
+            <div style={{ backgroundImage: "url(https://c.tenor.com/TZaIBNauQfAAAAAd/tenor.gif) no-repeat center center/cover", }} className="single-page-area background-container">
                 <div className="p-4 title-area justify-content-between">
                     <img src="/logo/logoAirdrop.jpeg" className="animate" width={50} alt="" srcset="" />
                     <div className="text-center">
-                   <TonConnectButton className="tonConnect" />
-                   <span style={{display: "flex",}}> 0 TON</span>
+                        <TonConnectButton className="tonConnect" />
+                        <span style={{ display: "flex", }}> 0 TON</span>
                     </div>
                 </div>
                 <div className="profile-details mt-5" style={{ backgroundImage: "url(/logo/logoAirdrop.jpeg)" }}>
@@ -71,10 +97,10 @@ const Home = () => {
                         </li>
                     </ul>
                 </div>
-                <div style={{ marginTop: "", marginLeft: "-10px" }} className="container">
+                <div style={{ marginTop: "40px", marginLeft: "-10px" }} className="container">
                     <div class="balance-container">
                         <img className="animate" src="/logo/logo1.png" alt="" srcset="" />
-                        <span style={{color: "#fff"}} class=" ">1,234,775.56</span>
+                        <span style={{ color: "#fff" }} class=" ">1,234,775.56</span>
                     </div>
                 </div>
                 <div className="container-fluid m-0">
@@ -84,7 +110,7 @@ const Home = () => {
                                 <div style={{ padding: "25px", opacity: "0.9", background: "#07080a", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19)" }}>
                                     <div style={{ boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19),", padding: "8px", background: "#0f1216", width: "100px", textAlign: "center", borderRadius: "7px" }}>
                                         <div>
-                                            <img className="animate" style={{ marginLeft: "20px", marginBottom: "6px", marginTop: "16px"}} width={40} src="/logo/flash.png" alt="" srcset="" />
+                                            <img className="animate" style={{ marginLeft: "20px", marginBottom: "6px", marginTop: "16px" }} width={40} src="/logo/flash.png" alt="" srcset="" />
                                             <p style={{ color: "#e1e1e1" }}>Bitclub</p>
                                             <button style={{ border: "none", outline: "none", fontSize: "14px", background: "#07080a", color: "#e1e1e1", borderRadius: "12px" }}>
                                                 +2000 BP
@@ -102,30 +128,13 @@ const Home = () => {
                         ))}
                     </Slider>
                 </div>
-                 <div className="container-fluid m-0">
-                    <Slider {...settings}>
-                        {cards.map((card) => (
-                            <div key={card.id} style={{ padding: "10px" }}>
-                                <div style={{ padding: "25px", opacity: "0.9", background: "#07080a", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19)" }}>
-                                    <div style={{ boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19),", padding: "8px", background: "#0f1216", width: "100px", textAlign: "center", borderRadius: "7px" }}>
-                                        <div>
-                                            <img className="animate" style={{ marginLeft: "20px", marginBottom: "6px", marginTop: "16px"}} width={40} src="/logo/flash.png" alt="" srcset="" />
-                                            <p style={{ color: "#e1e1e1" }}>Bitclub</p>
-                                            <button style={{ border: "none", outline: "none", fontSize: "14px", background: "#07080a", color: "#e1e1e1", borderRadius: "12px" }}>
-                                                +2000 BP
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <button style={{ float: "right", background: "#0f1216", color: "#e1e1e1", marginTop: "-50px", marginRight: "4px", border: "none", padding: "5px", width: "80px", fontSize: "15px", borderRadius: "50px" }}>
-                                        Claim
-                                    </button>
-                                    <h5 style={{ float: "right", marginTop: "-120px", color: '#e1e1e1', padding: "10px", borderRadius: "7px", boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19)" }}>
-                                        Daily!
-                                    </h5>
-                                </div>
-                            </div>
-                        ))}
-                    </Slider>
+                <div style={bgStyles} className="container-fluid">
+                    <button style={bgStyles.btn} class="bg-white">
+                        <img src="/logo/flash.png" width={18} alt="" srcset="" />
+                        Farming
+                        <img style={bgStyles.logo} src="/logo/logoAirdrop.jpeg" width={18} alt="" srcset="" />
+                        5000
+                    </button>
                 </div>
                 <div className="main-footer-bottom d-block text-center">
                     <ul>
