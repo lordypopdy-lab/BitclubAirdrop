@@ -43,7 +43,7 @@ const Home = () => {
         textAlign: "center",
         marginTop: "-25px",
         btn: {
-            marginTop: "-79px",
+            marginTop: "-110px",
             width: "100%",
             border: "none",
             outline: "none",
