@@ -41,7 +41,9 @@ const Home = () => {
         alignItems: "center",
         color: "white",
         textAlign: "center",
+        marginTop: "-25px",
         btn: {
+            marginTop: "-79px",
             width: "100%",
             border: "none",
             outline: "none",
@@ -96,7 +98,7 @@ const Home = () => {
                         </li>
                     </ul>
                 </div>
-                <div style={{ marginTop: "40px", marginLeft: "-10px" }} className="container">
+                <div style={{  marginLeft: "-10px" }} className="container">
                     <div class="balance-container">
                         <img className="animate" src="/logo/logo1.png" alt="" srcset="" />
                         <span style={{ color: "#fff" }} class=" ">1,234,775.56</span>
