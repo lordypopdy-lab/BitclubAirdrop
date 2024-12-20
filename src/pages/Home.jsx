@@ -33,7 +33,7 @@ const Home = () => {
 
     const bgStyles = {
         position: "relative",
-        width: "95%",
+        width: "98%",
         height: "300px",
         background: "url(/logo/Home.jpeg)",
         display: "flex",
