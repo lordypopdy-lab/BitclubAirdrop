@@ -33,7 +33,7 @@ const Home = () => {
 
     const bgStyles = {
         position: "relative",
-        width: "100%",
+        width: "95%",
         height: "300px",
         background: "url(/logo/Home.jpeg)",
         display: "flex",
@@ -41,7 +41,6 @@ const Home = () => {
         alignItems: "center",
         color: "white",
         textAlign: "center",
-        marginTop: "60px",
         btn: {
             width: "100%",
             border: "none",
