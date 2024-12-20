@@ -48,7 +48,7 @@ const Home = () => {
             border: "none",
             outline: "none",
             borderRadius: "4px",
-            padding: "17px",
+            padding: "15px",
             fontFamily: `"Poppins", sans-serif`,
             fontWeight: "500",
             fontStyle: "normal",
