@@ -10,10 +10,170 @@ import { TonConnectButton, useTonConnectUI } from '@tonconnect/ui-react';
 
 const Home = () => {
 
-    const userID = "76877FHFghhjg&&%";
-    const [activeTask, setActiveTask] = useState([]);
-    const [taskDone, setTaskDone] = useState([]);
-    const [taskButton, setTaskButton] = useState({ value: "", taskID: "" });
+    const [tokens, setTokens] = useState(0.0);
+    const [canFarm, setCanFarm] = useState(false);
+    const [farming, setFarming] = useState(false);
+    const [canClaim, setCanClaim] = useState(false);
+
+    const userId = "example-user-id";
+
+    useEffect(() => {
+        const fetchStatus = async () => {
+            try {
+                console.log("Fetching farming status...");
+                const response = await axios.get(`/api/farming/status/${userId}`);
+                const {
+                    tokenBalance,
+                    farmingStartTime,
+                    farmingDuration,
+                    claimed,
+                } = response.data;
+
+                console.log("Response data:", response.data);
+
+                // Set token balance
+                if (typeof tokenBalance === "number" && !isNaN(tokenBalance)) {
+                    setTokens(tokenBalance);
+                } else {
+                    setTokens(0.0);
+                }
+
+                // Parse farmingStartTime and validate farmingDuration
+                const startTime = new Date(farmingStartTime).getTime();
+                if (isNaN(startTime)) {
+                    console.error("Invalid farmingStartTime:", farmingStartTime);
+                    return;
+                }
+
+                const currentTime = Date.now();
+
+                if (!claimed) {
+                    if (typeof farmingDuration !== "number" || isNaN(farmingDuration)) {
+                        console.error("Invalid farmingDuration:", farmingDuration);
+                        return;
+                    }
+
+                    const elapsedTime = currentTime - startTime;
+
+                    if (elapsedTime >= farmingDuration) {
+                        setCanClaim(true);
+                        setFarming(false);
+                        setTokens(200.0);
+                    } else {
+                        setFarming(true);
+
+                        // Start token counting based on elapsed time
+                        startTokenCounting(elapsedTime, farmingDuration);
+
+                        const remainingTime = farmingDuration - elapsedTime;
+                        setTimeout(() => {
+                            setCanClaim(true);
+                            setFarming(false);
+                            setTokens(200.0);
+                        }, remainingTime);
+                    }
+                } else {
+                    setCanFarm(true);
+                }
+            } catch (error) {
+                console.error("Error fetching farming status:", error);
+                setTokens(0.0);
+            }
+        };
+
+        fetchStatus();
+    }, [userId]);
+
+    const startTokenCounting = (elapsedTime, farmingDuration) => {
+        if (!farmingDuration || isNaN(farmingDuration)) {
+            console.error("Invalid farming duration");
+            return;
+        }
+
+        const totalTokens = 200.0;
+        const intervalDuration = 100;
+        const increment = totalTokens / (farmingDuration / intervalDuration);
+
+        let currentTokens = (elapsedTime / farmingDuration) * totalTokens;
+
+        const interval = setInterval(() => {
+            if (currentTokens >= totalTokens) {
+                clearInterval(interval);
+                setTokens(totalTokens.toFixed(1));
+                return;
+            }
+
+            currentTokens += increment;
+            setTokens(currentTokens.toFixed(1));
+        }, intervalDuration);
+
+        return () => clearInterval(interval);
+    };
+
+
+    const farmTokens = async () => {
+        try {
+            const response = await axios.post(`/api/farming/start`, { userId });
+            const { farmingDuration } = response.data;
+
+            setCanFarm(false);
+            setFarming(true);
+
+            startTokenCounting(0, farmingDuration);
+
+            setTimeout(() => {
+                setCanClaim(true);
+                setFarming(false);
+                setTokens(200.0); // Ensure tokens reach max at the end
+            }, farmingDuration);
+        } catch (error) {
+            console.error("Error starting farming:", error);
+        }
+    };
+
+    const claimTokens = async () => {
+        try {
+            const response = await axios.post(`/api/farming/claim`, { userId });
+            const { tokenBalance } = response.data;
+
+            alert(`You have claimed ${tokenBalance} tokens!`);
+            setTokens(0.0); // Reset token count
+            setCanClaim(false);
+
+            setTimeout(() => setCanFarm(true), 3 * 60 * 60 * 1000); // Enable farming after 3 hours
+        } catch (error) {
+            console.error("Error claiming tokens:", error);
+        }
+    };
+
+    // const farmTokens = async () => {
+    //     try {
+    //         const response = await axios.post(`/api/farming/start`, { userId });
+    //         const { farmingDuration } = response.data;
+
+    //         setCanFarm(false);
+    //         setFarming(true);
+    //         setTimeout(() => setCanClaim(true), farmingDuration);
+    //     } catch (error) {
+    //         console.error("Error starting farming:", error);
+    //     }
+    // };
+
+    // // Claim tokens
+    // const claimTokens = async () => {
+    //     try {
+    //         const response = await axios.post(`/api/farming/claim`, { userId });
+    //         const { tokenBalance } = response.data;
+
+    //         alert(`You have claimed ${tokenBalance} tokens!`);
+    //         setTokens(0.0); // Reset token count
+    //         setCanClaim(false);
+    //         setTimeout(() => setCanFarm(true), 3 * 60 * 60 * 1000); // Enable farming after 3 hours
+    //     } catch (error) {
+    //         console.error("Error claiming tokens:", error);
+    //     }
+    // };
+
 
     const settings = {
         dots: false,
@@ -33,7 +193,7 @@ const Home = () => {
 
     const bgStyles = {
         position: "relative",
-        width: "98%",
+        width: "100%",
         height: "300px",
         background: "url(/logo/Home.jpeg)",
         display: "flex",
@@ -78,7 +238,7 @@ const Home = () => {
                 <div className="p-4 title-area justify-content-between">
                     <img src="/logo/logoAirdrop.jpeg" className="animate" width={50} alt="" srcset="" />
                     <div className="text-center">
-                        <TonConnectButton className="tonConnect" />
+                        {/* <TonConnectButton className="tonConnect" /> */}
                         <span style={{ display: "flex", }}> 0 TON</span>
                     </div>
                 </div>
@@ -98,7 +258,7 @@ const Home = () => {
                         </li>
                     </ul>
                 </div>
-                <div style={{  marginLeft: "-10px" }} className="container">
+                <div style={{ marginLeft: "-10px" }} className="container">
                     <div class="balance-container">
                         <img className="animate" src="/logo/logo1.png" alt="" srcset="" />
                         <span style={{ color: "#fff" }} class=" ">1,234,775.56</span>
@@ -130,12 +290,31 @@ const Home = () => {
                     </Slider>
                 </div>
                 <div style={bgStyles} className="container-fluid">
-                    <button style={bgStyles.btn} class="bg-white">
-                        <img src="/logo/flash.png" width={18} alt="" srcset="" />
-                        Farming
-                        <img style={bgStyles.logo} src="/logo/logoAirdrop.jpeg" width={18} alt="" srcset="" />
-                        5000
-                    </button>
+                    {!canClaim && (
+                        <button
+                            onClick={farmTokens}
+                            disabled={!canFarm || farming}
+                            style={bgStyles.btn}
+                        >
+                            <img src="/logo/flash.png" width={18} alt="" srcset="" />
+                            {farming ? `Farming in Progress...${tokens}` : `Start Farming`}
+                        </button>
+                    )}
+
+                    {canClaim && (
+                        <button
+                            onClick={claimTokens}
+                            style={{
+                                padding: "10px 20px",
+                                fontSize: "16px",
+                                cursor: "pointer",
+                            }}
+                        >
+                            <img src="/logo/flash.png" width={18} alt="" srcset="" />
+                            Claim Tokens
+                            {tokens}
+                        </button>
+                    )}
                 </div>
                 <div className="main-footer-bottom d-block text-center">
                     <ul>
