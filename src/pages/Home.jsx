@@ -308,11 +308,17 @@ const Home = () => {
                                 padding: "10px 20px",
                                 fontSize: "16px",
                                 cursor: "pointer",
+                                border: "none",
+                                borderRadius: "5px",
+                                width: "100%",
+                                fontFamily: `"Poppins", sans-serif`,
+                                fontWeight: "500",
+                                fontStyle: "normal",
                             }}
                         >
                             <img src="/logo/flash.png" width={18} alt="" srcset="" />
-                            Claim Tokens
-                            {tokens}
+                            Farm Tokens
+                          <span className="m-2">{tokens}</span>
                         </button>
                     )}
                 </div>
