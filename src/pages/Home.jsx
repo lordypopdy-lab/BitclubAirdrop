@@ -276,7 +276,7 @@ const Home = () => {
                         <span style={{ display: "flex", }}> 0 TON</span>
                     </div>
                 </div>
-                <div className="profile-details" style={{ backgroundImage: "url(/logo/logoAirdrop.jpeg)", marginTop: "-10px" }}>
+                <div className="profile-details" style={{ backgroundImage: "url(/logo/logoAirdrop.jpeg)", marginTop: "" }}>
                     <ul>
                         <li>
                             <h6 style={{ fontSize: "14px" }}>{accInfo.farmStartTime}</h6>
