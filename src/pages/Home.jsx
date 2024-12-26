@@ -240,7 +240,7 @@ const Home = () => {
             width: "100%",
             border: "none",
             outline: "none",
-            borderRadius: "12px",
+            borderRadius: "9px",
             padding: "15px",
             fontFamily: `"Poppins", sans-serif`,
             fontWeight: "500",
