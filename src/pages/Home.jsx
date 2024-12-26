@@ -14,6 +14,7 @@ const Home = () => {
     const [canFarm, setCanFarm] = useState(false);
     const [farming, setFarming] = useState(false);
     const [canClaim, setCanClaim] = useState(false);
+    const [accInfo, setAccountInfo] = useState({ balance: "", farmStartTime: "", farmDuration: "", ClaimStat: "" });
 
     const userId = "example-user-id";
 
@@ -29,7 +30,33 @@ const Home = () => {
                     claimed,
                 } = response.data;
 
-                console.log("Response data:", response.data);
+                const formartted = (time) => {
+                    const dateString = time;
+                    const date = new Date(dateString);
+
+                    const hours = date.getUTCHours().toString().padStart(2, '0');
+                    const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+                    const seconds = date.getUTCSeconds().toString().padStart(2, '0');
+
+                    const formattedTime = `${hours}:${minutes}:${seconds} UTC`;
+
+                    return formattedTime;
+                }
+
+
+                const formattedBalance = new Intl.NumberFormat('en-US', {
+                    style: 'decimal',
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }).format(tokenBalance);
+
+                setAccountInfo({
+                    balance: formattedBalance,
+                    farmStartTime: formartted(farmingStartTime),
+                    farmDuration: formartted(farmingDuration),
+                    ClaimStat: claimed
+                })
+                console.log(claimed);
 
                 // Set token balance
                 if (typeof tokenBalance === "number" && !isNaN(tokenBalance)) {
@@ -80,6 +107,7 @@ const Home = () => {
                 setTokens(0.0);
             }
         };
+
 
         fetchStatus();
     }, [userId]);
@@ -208,7 +236,7 @@ const Home = () => {
         textAlign: "center",
         marginTop: "-25px",
         btn: {
-            marginTop: "-120px",
+            marginTop: "-160px",
             width: "100%",
             border: "none",
             outline: "none",
@@ -247,26 +275,26 @@ const Home = () => {
                         <span style={{ display: "flex", }}> 0 TON</span>
                     </div>
                 </div>
-                <div className="profile-details mt-5" style={{ backgroundImage: "url(/logo/logoAirdrop.jpeg)" }}>
+                <div className="profile-details" style={{ backgroundImage: "url(/logo/logoAirdrop.jpeg)", marginTop: "-10px" }}>
                     <ul>
                         <li>
-                            <h6>06</h6>
-                            <span>Total Game </span>
+                            <h6 style={{ fontSize: "14px" }}>{accInfo.farmStartTime}</h6>
+                            <span>Farming Time</span>
                         </li>
                         <li>
-                            <h6>20</h6>
-                            <span>Total Wins  </span>
+                            <h6 style={{ fontSize: "14px" }}>{accInfo.farmDuration}</h6>
+                            <span>Farming Duration</span>
                         </li>
                         <li>
-                            <h6>15</h6>
-                            <span>Total Loses </span>
+                            <h6>{accInfo.ClaimStat}</h6>
+                            <span>isClaimed</span>
                         </li>
                     </ul>
                 </div>
                 <div style={{ marginLeft: "-10px" }} className="container">
                     <div class="balance-container">
                         <img className="animate" src="/logo/logo1.png" alt="" srcset="" />
-                        <span style={{ color: "#fff" }} class=" ">1,234,775.56</span>
+                        <span style={{ color: "#fff" }} class=" ">{accInfo.balance}</span>
                     </div>
                 </div>
                 <div className="container-fluid m-0">
@@ -309,7 +337,9 @@ const Home = () => {
                     {canClaim && (
                         <button
                             onClick={claimTokens}
-                            style={{
+                            style={bgStyles.btn}
+                        >
+                            {/* {
                                 padding: "10px 20px",
                                 fontSize: "16px",
                                 cursor: "pointer",
@@ -319,8 +349,7 @@ const Home = () => {
                                 fontFamily: `"Poppins", sans-serif`,
                                 fontWeight: "500",
                                 fontStyle: "normal",
-                            }}
-                        >
+                            } */}
                             <img src="/logo/flash.png" width={18} alt="" srcset="" />
                             Farm Tokens
                             <span className="m-2">{tokens}</span>

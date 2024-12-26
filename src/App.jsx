@@ -1,6 +1,7 @@
 import Task from "./pages/Task";
 import Admin from "./Admin/Admin";
 import Home from "./pages/Home";
+import Referral from "./pages/Referral";
 
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -14,6 +15,7 @@ function App() {
             <Route index="/" element={<Home />} />
                 <Route path="/task" element={<Task />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/ref" element={<Referral />} />
             </Routes>
         </Router>
     );
