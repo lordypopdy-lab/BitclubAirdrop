@@ -234,7 +234,7 @@ const Home = () => {
         alignItems: "center",
         color: "white",
         textAlign: "center",
-        marginTop: "-49px",
+        marginTop: "-30px",
         btn: {
             marginTop: "",
             width: "100%",
@@ -297,7 +297,7 @@ const Home = () => {
                         <span style={{ color: "#fff" }} class=" ">{accInfo.balance}</span>
                     </div>
                 </div>
-                <div className="container-fluid m-0 mt-4">
+                <div className="container-fluid m-0 mt-2">
                     <Slider {...settings}>
                         {cards.map((card) => (
                             <div key={card.id} style={{ padding: "10px" }}>
