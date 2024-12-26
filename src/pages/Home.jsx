@@ -234,7 +234,7 @@ const Home = () => {
         alignItems: "center",
         color: "white",
         textAlign: "center",
-        marginTop: "-9px",
+        marginTop: "-49px",
         btn: {
             marginTop: "",
             width: "100%",
