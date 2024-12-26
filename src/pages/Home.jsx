@@ -236,7 +236,7 @@ const Home = () => {
         textAlign: "center",
         marginTop: "-30px",
         btn: {
-            marginTop: "",
+            marginTop: "-40px",
             width: "100%",
             border: "none",
             outline: "none",
