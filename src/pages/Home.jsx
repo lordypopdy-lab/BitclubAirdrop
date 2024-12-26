@@ -297,7 +297,7 @@ const Home = () => {
                         <span style={{ color: "#fff" }} class=" ">{accInfo.balance}</span>
                     </div>
                 </div>
-                <div className="container-fluid m-0">
+                <div className="container-fluid m-0 mt-4">
                     <Slider {...settings}>
                         {cards.map((card) => (
                             <div key={card.id} style={{ padding: "10px" }}>
