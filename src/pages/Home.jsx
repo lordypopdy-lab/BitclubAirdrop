@@ -291,7 +291,7 @@ const Home = () => {
                         </li>
                     </ul>
                 </div>
-                <div style={{ marginLeft: "-10px" }} className="container">
+                <div style={{ marginLeft: "-10px" }} className="container mt-3">
                     <div class="balance-container">
                         <img className="animate" src="/logo/logo1.png" alt="" srcset="" />
                         <span style={{ color: "#fff" }} class=" ">{accInfo.balance}</span>
