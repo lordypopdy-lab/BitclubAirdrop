@@ -3,7 +3,7 @@ import React from 'react'
 const Referral = () => {
   return (
     <div>
-      <h3>Hello Referral</h3>
+      <h3 className='text-white'>Hello Referral</h3>
     </div>
   )
 }
