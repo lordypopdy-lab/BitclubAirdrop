@@ -10,15 +10,15 @@ import { Link } from "react-router-dom";
 
 const Task = () => {
 
-    const userID = "76877FHFghhjg&&%";
     const [activeTask, setActiveTask] = useState([]);
     const [taskDone, setTaskDone] = useState([]);
     const [taskButton, setTaskButton] = useState({ value: "", taskID: "" });
 
+    const userID = "example-user-id";
+
     useEffect(() => {
         const getActiveTask = async () => {
             try {
-                const userID = "76877FHFghhjg&&%";
                 const response = await axios.post("/activeTask", { userID });
                 const datas = response.data.data.reverse();
                 setActiveTask(datas)
@@ -30,7 +30,6 @@ const Task = () => {
         getActiveTask();
 
         const getTaskDone = async () => {
-            const userID = "76877FHFghhjg&&%";
             const response = await axios.post("/task", { userID });
             const datas = response.data.data.reverse();
             setTaskDone(datas);
@@ -55,16 +54,19 @@ const Task = () => {
         { id: 2, title: "Card 2", content: "This is Card 2" },
     ];
 
-    const handleTaskButtonClick = async (TaskID) => {
+    const handleTaskButtonClick = async (TaskID, Link) => {
         // Set the task button to loading state
         setTaskButton({ value: "load", taskID: TaskID });
         console.log("TaskButton set to loading:", { value: "load", taskID: TaskID });
         try {
             const { data } = await axios.post("/createTask", { TaskID, userID });
+           if(data) {
+            window.location.href = Link
             setTimeout(() => {
                 setTaskButton({ value: "claim", taskID: TaskID });
             }, 10000);
             console.log("Task completed, TaskButton set to claim.");
+           }
         } catch (error) {
             toast.error("Error Creating Task", {
                 style: {
@@ -86,14 +88,11 @@ const Task = () => {
         }));
     };
 
-    const claimFunction = async (claimID) => {
+    const claimFunction = async (claimID, claimValue) => {
         updateTaskButton(claimID, "load");
 
-
-
-
         try {
-            const { data } = await axios.post('/claimed', { claimID });
+            const { data } = await axios.post('/claimed', { claimID, userID, claimValue});
             if (data.message) {
                 console.log("Task Claimed Completed", data);
                 updateTaskButton(claimID, "completed");
@@ -144,7 +143,6 @@ const Task = () => {
                 <div className="title-area justify-content-between">
                     <img src="/logo/logoAirdrop.jpeg" className="animate" width={50} alt="" srcset="" />
                     <h2 className="text-center" style={{ color: "#f8f9fa", fontSize: "25px", marginRight: "120px" }}>Missions</h2>
-                    {/* <div style={{ color: "#f8f9fa" }} className="balance">$500 <span><img src="assets/img/icon/dollar-sign.png" alt="img" /></span></div> */}
                 </div>
                 <div style={{ background: "#0f1216" }} className="container mt-4 p-3">
                     <div className="sub-container">
@@ -204,7 +202,7 @@ const Task = () => {
                                         <img className="animateTask" width={40} src={`${task.Icon}`} alt="" />
                                         {task.Message}
                                     </span>
-                                    <a href={task.Link}>
+                                    <a>
                                         {taskButton.value === "load" && taskButton.taskID === task.TaskID ? (
                                             <button className="claimbtn pb-2 pt-1" disabled style={{ marginTop: "-20px" }}>
                                                 <div className="spinner-border spinner-border-sm" role="status">
@@ -212,11 +210,11 @@ const Task = () => {
                                                 </div>
                                             </button>
                                         ) : taskButton.value === "claim" && taskButton.taskID === task.TaskID ? (
-                                            <button onClick={() => claimFunction(task.TaskID)} className="claimbtn" style={{ fontSize: "13px", marginTop: "-20px" }} disabled>
+                                            <button onClick={() => claimFunction(task.TaskID, task.Value)} className="claimbtn" style={{ fontSize: "13px", marginTop: "-20px" }} disabled>
                                                 Claim
                                             </button>
                                         ) : (
-                                            <button onClick={() => handleTaskButtonClick(task.TaskID)} style={{ fontSize: "14px", marginTop: "-20px" }} className="claimbtn">
+                                            <button onClick={() => handleTaskButtonClick(task.TaskID, task.Link)} style={{ fontSize: "14px", marginTop: "-20px" }} className="claimbtn">
                                                 {task.ButtonStatus}
                                             </button>
                                         )}
@@ -259,7 +257,7 @@ const Task = () => {
                                     } else if (buttonState === "Claim") {
                                         return (
                                             <button
-                                                onClick={() => claimFunction(data.TaskID)}
+                                                onClick={() => claimFunction(data.TaskID, data.Value)}
                                                 className="claimbtn"
                                                 style={{ fontSize: "13px" }}
                                             >
@@ -268,7 +266,7 @@ const Task = () => {
                                         );
                                     } else {
                                         return (
-                                            <button onClick={() => claimFunction(data.TaskID)} className="claimbtn">
+                                            <button onClick={() => claimFunction(data.TaskID, data.Value)} className="claimbtn">
                                                 <svg
                                                     xmlns="http://www.w3.org/2000/svg"
                                                     style={{ margin: "4px" }}

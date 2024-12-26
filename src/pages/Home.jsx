@@ -133,11 +133,16 @@ const Home = () => {
 
     const claimTokens = async () => {
         try {
-            const response = await axios.post(`/api/farming/claim`, { userId });
+            const response = await axios.post(`/api/farming/claim`, { userId, tokens });
             const { tokenBalance } = response.data;
 
-            alert(`You have claimed ${tokenBalance} tokens!`);
-            setTokens(0.0); // Reset token count
+            toast.success(`You have claimed ${tokenBalance} tokens!`, {
+                style: {
+                    backgroundColor: 'black',
+                    color: 'white',
+                },
+            })
+            setTokens(0.0);
             setCanClaim(false);
 
             setTimeout(() => setCanFarm(true), 3 * 60 * 60 * 1000); // Enable farming after 3 hours
@@ -207,7 +212,7 @@ const Home = () => {
             width: "100%",
             border: "none",
             outline: "none",
-            borderRadius: "4px",
+            borderRadius: "12px",
             padding: "15px",
             fontFamily: `"Poppins", sans-serif`,
             fontWeight: "500",
@@ -309,7 +314,7 @@ const Home = () => {
                                 fontSize: "16px",
                                 cursor: "pointer",
                                 border: "none",
-                                borderRadius: "5px",
+                                borderRadius: "12px",
                                 width: "100%",
                                 fontFamily: `"Poppins", sans-serif`,
                                 fontWeight: "500",
@@ -318,7 +323,7 @@ const Home = () => {
                         >
                             <img src="/logo/flash.png" width={18} alt="" srcset="" />
                             Farm Tokens
-                          <span className="m-2">{tokens}</span>
+                            <span className="m-2">{tokens}</span>
                         </button>
                     )}
                 </div>
