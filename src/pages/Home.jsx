@@ -272,6 +272,7 @@ const Home = () => {
                     <img src="/logo/logoAirdrop.jpeg" className="animate" width={50} alt="" srcset="" />
                     <div className="text-center">
                         {/* <TonConnectButton className="tonConnect" /> */}
+                        <img src="https://cryptologos.cc/logos/toncoin-ton-logo.png?v=040" width={20} alt="" srcset="" />
                         <span style={{ display: "flex", }}> 0 TON</span>
                     </div>
                 </div>
