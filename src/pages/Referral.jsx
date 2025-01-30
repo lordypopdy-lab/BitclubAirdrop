@@ -6,6 +6,7 @@ const Referral = () => {
   const fetchUserData = () => {
     if (window.Telegram && window.Telegram.WebApp) {
       const user = window.Telegram.WebApp.initDataUnsafe.user;
+      console.log("USER:", user);
       if (user) {
         setUserData({
           id: user.id || "N/A",
