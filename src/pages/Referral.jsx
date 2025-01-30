@@ -1,31 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Referral = () => {
   const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
 
   const fetchUserData = () => {
-    if (window.Telegram && window.Telegram.WebApp) {
-      const user = window.Telegram.WebApp.initDataUnsafe.user;
-      console.log("USER:", user);
-      if (user) {
-        setUserData({
-          id: user.id || "N/A",
-          first_name: user.first_name || "N/A",
-          last_name: user.last_name || "N/A",
-          username: user.username || "N/A",
-          photo_url: user.photo_url || "",
-        });
+    try {
+      if (window.Telegram && window.Telegram.WebApp) {
+        console.log("Telegram WebApp detected");
+        const initData = window.Telegram.WebApp.initDataUnsafe;
+        console.log("Init Data:", initData);
+
+        if (initData && initData.user) {
+          console.log("USER:", initData.user);
+          setUserData({
+            id: initData.user.id || "N/A",
+            first_name: initData.user.first_name || "N/A",
+            last_name: initData.user.last_name || "N/A",
+            username: initData.user.username || "N/A",
+            photo_url: initData.user.photo_url || "",
+          });
+        } else {
+          setError("User data not available.");
+        }
       } else {
-        console.error("User data not available.");
+        setError("Telegram WebApp API not found.");
       }
-    } else {
-      console.error("Telegram WebApp API not found.");
+    } catch (err) {
+      setError("An error occurred while fetching user data.");
+      console.error(err);
     }
   };
+
+  useEffect(() => {
+    window.Telegram?.WebApp?.expand();
+  }, []);
 
   return (
     <div>
       <button onClick={fetchUserData}>Fetch User Data</button>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       {userData && (
         <div>
           <p><strong>User ID:</strong> {userData.id}</p>
