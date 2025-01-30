@@ -14,7 +14,7 @@ const Task = () => {
     const [taskDone, setTaskDone] = useState([]);
     const [taskButton, setTaskButton] = useState({ value: "", taskID: "" });
 
-    const userID = "example-user-id";
+    const userID = "example-user03";
 
     useEffect(() => {
         const getActiveTask = async () => {
@@ -55,13 +55,14 @@ const Task = () => {
     ];
 
     const handleTaskButtonClick = async (TaskID, Link) => {
-        // Set the task button to loading state
+
         setTaskButton({ value: "load", taskID: TaskID });
         console.log("TaskButton set to loading:", { value: "load", taskID: TaskID });
         try {
             const { data } = await axios.post("/createTask", { TaskID, userID });
            if(data) {
-            window.location.href = Link
+            // window.location.href = Link
+            console.log(data)
             setTimeout(() => {
                 setTaskButton({ value: "claim", taskID: TaskID });
             }, 10000);

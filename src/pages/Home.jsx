@@ -16,13 +16,13 @@ const Home = () => {
     const [canClaim, setCanClaim] = useState(false);
     const [accInfo, setAccountInfo] = useState({ balance: "", farmStartTime: "", farmDuration: "", ClaimStat: "" });
 
-    const userId = "example-user-id";
+    const userId = "example-user03";
 
     useEffect(() => {
         const fetchStatus = async () => {
             try {
                 console.log("Fetching farming status...");
-                const response = await axios.get(`/api/farming/status/${userId}`);
+                const response = await axios.get(`/status/${userId}`);
                 const {
                     tokenBalance,
                     farmingStartTime,
@@ -48,8 +48,8 @@ const Home = () => {
                     style: 'decimal',
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2
-                }).format(tokenBalance);
-
+                }).format(tokenBalance)
+                console.log(formattedBalance)
                 setAccountInfo({
                     balance: formattedBalance,
                     farmStartTime: formartted(farmingStartTime),
@@ -141,7 +141,7 @@ const Home = () => {
 
     const farmTokens = async () => {
         try {
-            const response = await axios.post(`/api/farming/start`, { userId });
+            const response = await axios.post(`/start`, { userId });
             const { farmingDuration } = response.data;
 
             setCanFarm(false);
@@ -152,7 +152,7 @@ const Home = () => {
             setTimeout(() => {
                 setCanClaim(true);
                 setFarming(false);
-                setTokens(200.0); // Ensure tokens reach max at the end
+                setTokens(200.0);
             }, farmingDuration);
         } catch (error) {
             console.error("Error starting farming:", error);
@@ -161,19 +161,29 @@ const Home = () => {
 
     const claimTokens = async () => {
         try {
-            const response = await axios.post(`/api/farming/claim`, { userId, tokens });
-            const { tokenBalance } = response.data;
-
+            const response = await axios.post(`/claim`, { userId, tokens });
+            const { tokenBalance, updated } = response.data;
             toast.success(`You have claimed ${tokenBalance} tokens!`, {
                 style: {
                     backgroundColor: 'black',
                     color: 'white',
                 },
             })
-            setTokens(0.0);
-            setCanClaim(false);
 
-            setTimeout(() => setCanFarm(true), 3 * 60 * 60 * 1000); // Enable farming after 3 hours
+            const formattedBalance = new Intl.NumberFormat('en-US', {
+                style: 'decimal',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(updated)
+            setTokens(0.0);
+            setFarming(false);
+            setCanClaim(false);
+            setCanFarm(true);
+            setAccountInfo({ balance: formattedBalance });
+
+            console.log("Token Balance:", formattedBalance);
+
+            setTimeout(() => setCanFarm(true), 3 * 60 * 60 * 1000);
         } catch (error) {
             console.error("Error claiming tokens:", error);
         }
@@ -292,6 +302,12 @@ const Home = () => {
                             </div>
                         ))}
                     </Slider>
+                    <Toaster
+                        position="top-center"
+                        reverseOrder={false}
+                        containerStyle={{ fontSize: "12px", }}
+                        toastOptions={{ duration: 4000 }}
+                    />
                 </div>
                 <div style={bgStyles} className="container-fluid">
                     {!canClaim && (
@@ -310,17 +326,7 @@ const Home = () => {
                             onClick={claimTokens}
                             style={bgStyles.btn}
                         >
-                            {/* {
-                                padding: "10px 20px",
-                                fontSize: "16px",
-                                cursor: "pointer",
-                                border: "none",
-                                borderRadius: "12px",
-                                width: "100%",
-                                fontFamily: `"Poppins", sans-serif`,
-                                fontWeight: "500",
-                                fontStyle: "normal",
-                            } */}
+
                             <img src="/logo/flash.png" width={18} alt="" srcset="" />
                             Farm Tokens
                             <span className="m-2">{tokens}</span>
