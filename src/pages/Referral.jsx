@@ -21,7 +21,10 @@ const Referral = () => {
     <div>
       <button onClick={fetchUserData}>Fetch User Data</button>
       {userData && (
-        <pre>{JSON.stringify(userData, null, 2)}</pre>
+        <div>
+          <p><strong>User ID:</strong> {userData.id}</p>
+          <pre>{JSON.stringify(userData, null, 2)}</pre>
+        </div>
       )}
     </div>
   );
