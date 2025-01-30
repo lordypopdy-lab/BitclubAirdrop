@@ -60,14 +60,14 @@ const Task = () => {
         console.log("TaskButton set to loading:", { value: "load", taskID: TaskID });
         try {
             const { data } = await axios.post("/createTask", { TaskID, userID });
-           if(data) {
-            window.location.href = Link
-            console.log(data)
-            setTimeout(() => {
-                setTaskButton({ value: "claim", taskID: TaskID });
-            }, 10000);
-            console.log("Task completed, TaskButton set to claim.");
-           }
+            if (data) {
+                window.location.href = Link
+                console.log(data)
+                setTimeout(() => {
+                    setTaskButton({ value: "claim", taskID: TaskID });
+                }, 5000);
+                console.log("Task completed, TaskButton set to claim.");
+            }
         } catch (error) {
             toast.error("Error Creating Task", {
                 style: {
@@ -91,9 +91,9 @@ const Task = () => {
 
     const claimFunction = async (claimID, claimValue) => {
         updateTaskButton(claimID, "load");
-
+        setTaskButton({value: "load", taskID: claimID})
         try {
-            const { data } = await axios.post('/claimed', { claimID, userID, claimValue});
+            const { data } = await axios.post('/claimed', { claimID, userID, claimValue });
             if (data.message) {
                 console.log("Task Claimed Completed", data);
                 updateTaskButton(claimID, "completed");
@@ -211,7 +211,14 @@ const Task = () => {
                                                 </div>
                                             </button>
                                         ) : taskButton.value === "claim" && taskButton.taskID === task.TaskID ? (
-                                            <button onClick={() => claimFunction(task.TaskID, task.Value)} className="claimbtn" style={{ fontSize: "13px", marginTop: "-20px" }} disabled>
+                                            <button
+                                                onClick={()=>claimFunction(task.TaskID, task.Value)}
+                                                className="claimbtn"
+                                                style={{
+                                                    fontSize: "13px",
+                                                    marginTop: "-20px"
+                                                }}
+                                                >
                                                 Claim
                                             </button>
                                         ) : (
@@ -287,7 +294,7 @@ const Task = () => {
                                     <li key={data._id} style={{ background: "#0f1216" }} className="p-1 rounded">
                                         <span style={{ background: "#07080a" }} className="single-profile-wrap">
                                             <img
-                                            className="animateTask"
+                                                className="animateTask"
                                                 src={data.Icon}
                                                 width={40}
                                                 alt=""
@@ -316,7 +323,7 @@ const Task = () => {
                     </ul>
                 </div>
                 <div className="main-footer-bottom d-block text-center">
-                <ul>
+                    <ul>
                         <li>
                             <Link to="/">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="M180-120q-25 0-42.5-17.5T120-180v-76l160-142v278H180Zm140 0v-160h320v160H320Zm360 0v-328L509-600l121-107 190 169q10 9 15 20.5t5 24.5v313q0 25-17.5 42.5T780-120H680ZM120-310v-183q0-13 5-25t15-20l300-266q8-8 18.5-11.5T480-819q11 0 21.5 3.5T520-804l80 71-480 423Z" /></svg><br />
