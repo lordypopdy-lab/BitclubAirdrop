@@ -5,7 +5,7 @@ import Referral from "./pages/Referral";
 
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+//http://localhost:8080 
 function App() {
     axios.defaults.baseURL = 'https://bitclub-airdrop-sever.vercel.app';
     axios.defaults.withCredentials = true;
