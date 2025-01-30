@@ -179,35 +179,6 @@ const Home = () => {
         }
     };
 
-    // const farmTokens = async () => {
-    //     try {
-    //         const response = await axios.post(`/api/farming/start`, { userId });
-    //         const { farmingDuration } = response.data;
-
-    //         setCanFarm(false);
-    //         setFarming(true);
-    //         setTimeout(() => setCanClaim(true), farmingDuration);
-    //     } catch (error) {
-    //         console.error("Error starting farming:", error);
-    //     }
-    // };
-
-    // // Claim tokens
-    // const claimTokens = async () => {
-    //     try {
-    //         const response = await axios.post(`/api/farming/claim`, { userId });
-    //         const { tokenBalance } = response.data;
-
-    //         alert(`You have claimed ${tokenBalance} tokens!`);
-    //         setTokens(0.0); // Reset token count
-    //         setCanClaim(false);
-    //         setTimeout(() => setCanFarm(true), 3 * 60 * 60 * 1000); // Enable farming after 3 hours
-    //     } catch (error) {
-    //         console.error("Error claiming tokens:", error);
-    //     }
-    // };
-
-
     const settings = {
         dots: false,
         infinite: true,
