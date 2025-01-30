@@ -61,7 +61,7 @@ const Task = () => {
         try {
             const { data } = await axios.post("/createTask", { TaskID, userID });
            if(data) {
-            // window.location.href = Link
+            window.location.href = Link
             console.log(data)
             setTimeout(() => {
                 setTaskButton({ value: "claim", taskID: TaskID });
