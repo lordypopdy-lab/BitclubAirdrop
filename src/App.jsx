@@ -7,7 +7,7 @@ import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
-    axios.defaults.baseURL = 'http://localhost:8080';
+    axios.defaults.baseURL = 'https://bitclub-airdrop-sever.vercel.app';
     axios.defaults.withCredentials = true;
     return (
         <Router>
