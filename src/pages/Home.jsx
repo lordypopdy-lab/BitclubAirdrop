@@ -356,7 +356,7 @@ const Home = () => {
                         toastOptions={{ duration: 4000 }}
                     />
                 </div>
-                {/* <div style={bgStyles} className="container-fluid ">
+                <div style={bgStyles} className="container-fluid ">
                     {!canClaim && (
                         <button
                             onClick={farmTokens}
@@ -379,7 +379,7 @@ const Home = () => {
                             <span className="m-2">{tokens}</span>
                         </button>
                     )}
-                </div> */}
+                </div>
                 <div className="main-footer-bottom d-block text-center">
                     <ul>
                         <li>
