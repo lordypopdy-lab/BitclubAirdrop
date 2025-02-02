@@ -191,7 +191,7 @@ const Home = () => {
 
     const settings = {
         dots: false,
-        infinite: true,
+        infinite: false,
         speed: 1000,
         slidesToShow: 1,
         slidesToScroll: 1,
@@ -214,7 +214,7 @@ const Home = () => {
         alignItems: "center",
         color: "white",
         textAlign: "center",
-        marginTop: "-30px",
+        marginTop: "-10px",
         btn: {
             marginTop: "19px",
             width: "100%",
@@ -250,13 +250,17 @@ const Home = () => {
             <div style={{ backgroundImage: "url(https://c.tenor.com/TZaIBNauQfAAAAAd/tenor.gif) no-repeat center center/cover", }} className="single-page-area background-container">
                 <div className="p-4 title-area justify-content-between">
                     <img src="/logo/logoAirdrop.jpeg" className="animate" width={50} alt="" srcset="" />
+                    <div className="custom-ton-button">
+                        <TonConnectButton />
+                    </div>
                     <div className="text-center">
                         {/* <TonConnectButton className="tonConnect" /> */}
                         <img src="https://cryptologos.cc/logos/toncoin-ton-logo.png?v=040" width={20} alt="" srcset="" />
                         <span style={{ display: "flex", }}> 0 TON</span>
                     </div>
                 </div>
-                <div className="profile-details" style={{ backgroundImage: "url(/logo/logoAirdrop.jpeg)", marginTop: "" }}>
+
+                {/* <div className="profile-details" style={{ backgroundImage: "url(/logo/logoAirdrop.jpeg)", marginTop: "" }}>
                     <ul>
                         <li>
                             <h6 style={{ fontSize: "14px" }}>{accInfo.farmStartTime}</h6>
@@ -271,37 +275,80 @@ const Home = () => {
                             <span>isClaimed</span>
                         </li>
                     </ul>
-                </div>
-                <div style={{ marginLeft: "-10px" }} className="container mt-3">
+                </div> */}
+                {/* <div style={{ marginLeft: "-10px" }} className="container mt-3">
                     <div class="balance-container">
                         <img className="animate" src="/logo/logo1.png" alt="" srcset="" />
                         <span style={{ color: "#fff" }} class=" ">{accInfo.balance}</span>
                     </div>
-                </div>
-                <div className="container-fluid m-0 mt-2">
-                    <Slider {...settings}>
-                        {cards.map((card) => (
-                            <div key={card.id} style={{ padding: "10px" }}>
-                                <div style={{ padding: "25px", opacity: "0.9", background: "#07080a", borderRadius: "10px", boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19)" }}>
-                                    <div style={{ boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19),", padding: "8px", background: "#0f1216", width: "100px", textAlign: "center", borderRadius: "7px" }}>
-                                        <div>
-                                            <img className="animate" style={{ marginLeft: "20px", marginBottom: "6px", marginTop: "16px" }} width={40} src="/logo/flash.png" alt="" srcset="" />
-                                            <p style={{ color: "#e1e1e1" }}>Bitclub</p>
-                                            <button style={{ border: "none", outline: "none", fontSize: "14px", background: "#07080a", color: "#e1e1e1", borderRadius: "12px" }}>
-                                                +2000 BP
-                                            </button>
+                </div> */}
+                <div class="container mt-2">
+                    <div class="card custom-card text-white">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <div class="section">
+                                        <div class="balance-container">
+                                            <img className="animate" src="/logo/logo1.png" alt="" srcset="" />
+                                            <span style={{ color: "#fff" }} class=" ">{accInfo.balance}</span>
                                         </div>
                                     </div>
-                                    <button style={{ float: "right", background: "#0f1216", color: "#e1e1e1", marginTop: "-50px", marginRight: "4px", border: "none", padding: "5px", width: "80px", fontSize: "15px", borderRadius: "50px" }}>
-                                        Claim
-                                    </button>
-                                    <h5 style={{ float: "right", marginTop: "-120px", color: '#e1e1e1', padding: "10px", borderRadius: "7px", boxShadow: "0 4px 8px 0 rgba(29, 28, 28, 0.2), 0 6px 20px 0 rgba(47, 46, 46, 0.19)" }}>
-                                        Daily!
-                                    </h5>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="section">Section 2</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="section">Section 3</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="section">
+                                        {!canClaim && (
+                                            <button
+                                                onClick={farmTokens}
+                                                disabled={!canFarm || farming}
+                                                style={bgStyles.btn}
+                                            >
+                                                <img src="/logo/flash.png" width={18} alt="" srcset="" />
+                                                {farming ? `Farming in Progress...${tokens}` : `Start Farming`}
+                                            </button>
+                                        )}
+
+                                        {canClaim && (
+                                            <button
+                                                onClick={claimTokens}
+                                                style={bgStyles.btn}
+                                            >
+
+                                                <img src="/logo/flash.png" width={18} alt="" srcset="" />
+                                                Claim Tokens
+                                                <span className="m-2">{tokens}</span>
+                                            </button>
+                                        )}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="container-fluid mt-2">
+                    {/* <Slider {...settings}>
+                        {cards.map((card) => (
+                            <div key={card.id} className="card">
+                                <div className="row">
+                                    <div className="col-sm-4">
+                                        <h5>card1</h5>
+                                    </div>
+                                    <div className="col-sm-4">
+                                        <h5>card1</h5>
+                                    </div>
+                                    <div className="col-sm-4">
+                                        <h5>card1</h5>
+                                    </div>
                                 </div>
                             </div>
                         ))}
-                    </Slider>
+                    </Slider> */}
                     <Toaster
                         position="top-center"
                         reverseOrder={false}
@@ -309,7 +356,7 @@ const Home = () => {
                         toastOptions={{ duration: 4000 }}
                     />
                 </div>
-                <div style={bgStyles} className="container-fluid">
+                {/* <div style={bgStyles} className="container-fluid ">
                     {!canClaim && (
                         <button
                             onClick={farmTokens}
@@ -332,7 +379,7 @@ const Home = () => {
                             <span className="m-2">{tokens}</span>
                         </button>
                     )}
-                </div>
+                </div> */}
                 <div className="main-footer-bottom d-block text-center">
                     <ul>
                         <li>

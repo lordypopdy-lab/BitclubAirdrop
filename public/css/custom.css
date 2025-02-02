@@ -1,0 +1,26 @@
+.custom-card {
+    background: url('../logo/bitclub01.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.section {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.custom-ton-button button {
+    background-color: #007bff !important; /* Custom background */
+    color: white !important; /* Custom text color */
+    border-radius: 8px !important; /* Rounded corners */
+    padding: 10px 20px !important; /* Adjust padding */
+    font-size: 16px !important; /* Adjust font size */
+    border: none !important; /* Remove default border */
+}
+
+.custom-ton-button button:hover {
+    background-color: #0056b3 !important; /* Hover effect */
+}
