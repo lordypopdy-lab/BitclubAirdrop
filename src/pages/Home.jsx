@@ -258,29 +258,6 @@ const Home = () => {
                         <span style={{ display: "flex", }}> 0 TON</span>
                     </div>
                 </div>
-
-                {/* <div className="profile-details" style={{ backgroundImage: "url(/logo/logoAirdrop.jpeg)", marginTop: "" }}>
-                    <ul>
-                        <li>
-                            <h6 style={{ fontSize: "14px" }}>{accInfo.farmStartTime}</h6>
-                            <span>Farming Time</span>
-                        </li>
-                        <li>
-                            <h6 style={{ fontSize: "14px" }}>{accInfo.farmDuration}</h6>
-                            <span>Farming Duration</span>
-                        </li>
-                        <li>
-                            <h6>{accInfo.ClaimStat}</h6>
-                            <span>isClaimed</span>
-                        </li>
-                    </ul>
-                </div> */}
-                {/* <div style={{ marginLeft: "-10px" }} className="container mt-3">
-                    <div class="balance-container">
-                        <img className="animate" src="/logo/logo1.png" alt="" srcset="" />
-                        <span style={{ color: "#fff" }} class=" ">{accInfo.balance}</span>
-                    </div>
-                </div> */}
                 <div class="container mt-2">
                     <div class="card custom-card text-white">
                         <div class="card-body">
@@ -308,7 +285,7 @@ const Home = () => {
                                                 style={bgStyles.btn}
                                             >
                                                 <img src="/logo/flash.png" width={18} alt="" srcset="" />
-                                                {farming ? `Farming in Progress...${tokens}` : `Start Farming`}
+                                                {farming ? `Farming in Progress...${tokens}` : `Bitcluber Claim`}
                                             </button>
                                         )}
 
@@ -319,7 +296,7 @@ const Home = () => {
                                             >
 
                                                 <img src="/logo/flash.png" width={18} alt="" srcset="" />
-                                                Claim Tokens
+                                                Bitcluber Claim
                                                 <span className="m-2">{tokens}</span>
                                             </button>
                                         )}
@@ -331,23 +308,6 @@ const Home = () => {
                     </div>
                 </div>
                 <div className="container-fluid mt-2">
-                    {/* <Slider {...settings}>
-                        {cards.map((card) => (
-                            <div key={card.id} className="card">
-                                <div className="row">
-                                    <div className="col-sm-4">
-                                        <h5>card1</h5>
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <h5>card1</h5>
-                                    </div>
-                                    <div className="col-sm-4">
-                                        <h5>card1</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </Slider> */}
                     <Toaster
                         position="top-center"
                         reverseOrder={false}
