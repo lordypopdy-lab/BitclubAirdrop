@@ -214,9 +214,8 @@ const Home = () => {
         alignItems: "center",
         color: "white",
         textAlign: "center",
-        marginTop: "-10px",
+        marginTop: "-33px",
         btn: {
-            marginTop: "19px",
             width: "100%",
             border: "none",
             outline: "none",
@@ -356,7 +355,7 @@ const Home = () => {
                         toastOptions={{ duration: 4000 }}
                     />
                 </div>
-                <div style={bgStyles} className="container-fluid ">
+                <div style={bgStyles} className="container-fluid">
                     {!canClaim && (
                         <button
                             onClick={farmTokens}
