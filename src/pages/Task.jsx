@@ -141,9 +141,13 @@ const Task = () => {
             {/* <!-- preloader area end --> */}
             <div className="body-overlay" id="body-overlay"></div>
             <div className="single-page-area">
-                <div className="title-area justify-content-between">
+                <div className="title-area d-flex justify-content-between">
                     <img src="/logo/logoAirdrop.jpeg" className="animate" width={50} alt="" srcset="" />
                     <h2 className="text-center" style={{ color: "#f8f9fa", fontSize: "25px", marginRight: "120px" }}>Missions</h2>
+                    <div className="text-center">
+                        <img src="https://cryptologos.cc/logos/toncoin-ton-logo.png?v=040" width={20} alt="" srcset="" />
+                        <span style={{ display: "flex", }}> 0 TON</span>
+                    </div>
                 </div>
                 <div style={{ background: "#0f1216" }} className="container mt-4 p-3">
                     <div className="sub-container">

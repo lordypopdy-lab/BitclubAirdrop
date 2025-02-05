@@ -1,3 +1,8 @@
+.section-title-new{
+    font-weight: 800;
+    margin-bottom: -10px;
+}
+
 .custom-card {
     background: url('../logo/bitclub01.jpg') no-repeat center center;
     background-size: cover;
@@ -24,3 +29,4 @@
 .custom-ton-button button:hover {
     background-color: #0056b3 !important; /* Hover effect */
 }
+

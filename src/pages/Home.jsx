@@ -253,7 +253,6 @@ const Home = () => {
                         <TonConnectButton />
                     </div>
                     <div className="text-center">
-                        {/* <TonConnectButton className="tonConnect" /> */}
                         <img src="https://cryptologos.cc/logos/toncoin-ton-logo.png?v=040" width={20} alt="" srcset="" />
                         <span style={{ display: "flex", }}> 0 TON</span>
                     </div>
@@ -271,36 +270,41 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <div class="section">Section 2</div>
+                                    <div class="section d-flex justify-content-between">
+                                        <div>
+                                            <div className="section-title-new">
+                                                Grid or Gold
+                                            </div>
+                                            <span>
+                                                <i>First Price: </i>
+                                                <img src="https://cryptologos.cc/logos/toncoin-ton-logo.png?v=040" width={17} className="img m-1 mb-2" alt="" srcset="" />
+                                                2
+                                            </span>
+                                        </div>
+                                        <img src="/logo/grid-or-gold.png" width={50} alt="" srcset="" />
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="section">Section 3</div>
+                                    <div class="section d-flex justify-content-between">
+                                        <div>
+                                            <i>Section:</i> One
+                                        </div>
+                                        <div>
+                                            <img src="/logo/hourglass.gif" width={40} alt="" srcset="" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="section">
-                                        {!canClaim && (
-                                            <button
-                                                onClick={farmTokens}
-                                                disabled={!canFarm || farming}
-                                                style={bgStyles.btn}
-                                            >
+                                        <div>
+                                            <img style={{borderRadius: "12px"}} src="/logo/bitclub04.jpeg" alt="" width={200} srcset="" />
+                                        </div>
+                                        <div>
+                                            <button style={bgStyles.btn}>
                                                 <img src="/logo/flash.png" width={18} alt="" srcset="" />
-                                                {farming ? `Farming in Progress...${tokens}` : `Bitcluber Claim`}
+                                                Join Community!
                                             </button>
-                                        )}
-
-                                        {canClaim && (
-                                            <button
-                                                onClick={claimTokens}
-                                                style={bgStyles.btn}
-                                            >
-
-                                                <img src="/logo/flash.png" width={18} alt="" srcset="" />
-                                                Bitcluber Claim
-                                                <span className="m-2">{tokens}</span>
-                                            </button>
-                                        )}
-
+                                        </div>
                                     </div>
                                 </div>
                             </div>
