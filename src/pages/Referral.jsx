@@ -48,7 +48,7 @@ const Referral = () => {
                         <span style={{ display: "flex", }}> 0 TON</span>
                     </div>
                 </div>
-                <div className="container-fluid mt-5">
+                <div style={{marginTop: "200px"}} className="container-fluid">
                     <h3 className='text-center text-light'>Invite and Earn!</h3>
                     <p className='text-light text-center f-800'>
                         Invite friends, get 0.5% of their minigame bets in
