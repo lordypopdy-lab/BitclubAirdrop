@@ -5,9 +5,9 @@ import Referral from "./pages/Referral";
 
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-//http://localhost:8080 
+//https://bitclub-airdrop-sever.vercel.app 
 function App() {
-    axios.defaults.baseURL = 'https://bitclub-airdrop-sever.vercel.app';
+    axios.defaults.baseURL = 'http://localhost:8080';
     axios.defaults.withCredentials = true;
     return (
         <Router>
@@ -16,6 +16,7 @@ function App() {
                 <Route path="/task" element={<Task />} />
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/ref" element={<Referral />} />
+                <Route path="/referral/:referralCode" element={<Referral />} />
             </Routes>
         </Router>
     );
